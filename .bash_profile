@@ -50,3 +50,5 @@ alias gbd='git branch -d'
 alias gp='git pull'
 alias gc='git checkout'
 alias gpo='git push origin'
+
+function killme { ps auxw | grep $1 | grep -v grep | awk '{system("kill " $2); print("killed process: " $11); }'; }
