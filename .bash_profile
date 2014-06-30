@@ -34,9 +34,6 @@ PATH="/usr/local/bin:$PATH"
 # ls colors
 export CLICOLOR=1
 
-# MAMP
-alias mamp='cd /Applications/MAMP/htdocs'
-
 # Directory Commands
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -53,9 +50,3 @@ alias gbd='git branch -d'
 alias gp='git pull'
 alias gc='git checkout'
 alias gpo='git push origin'
-
-# Jekyll Commands
-alias jsw="jekyll serve -w"
-
-# Applications
-alias web='open -a Google\ Chrome.app'
