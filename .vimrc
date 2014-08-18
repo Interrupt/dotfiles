@@ -4,20 +4,7 @@ set nocompatible
 " enable syntax highlighting
 syntax enable
 
-" configure Vundle
-filetype on " without this vim emits a zero exit status, later, because of :ft off
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" install Vundle bundles
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-  source ~/.vimrc.bundles.local
-endif
-
-" ensure ftdetect et al work by including this after the Vundle stuff
-filetype plugin indent on
+execute pathogen#infect()
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
