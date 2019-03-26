@@ -92,8 +92,12 @@ module.exports = {
     // set to false for no bell
     bell: 'SOUND',
 
+    hyperStatusLine: {
+      footerTransparent: false,
+    },
+
     // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false
+    copyOnSelect: true
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
@@ -115,11 +119,23 @@ module.exports = {
     'hyper-materialshell',
     'hyperterm-tab-icons',
     'hyperterm-paste',
-    "hyper-run"
+    'hyper-run',
+    //'hyper-statusline',
+    'hyper-gcp-status-line',
+    'hypercwd',
+    'hyper-pane',
+    'hyper-search',
+    'hyper-yes',
+    'hyper-broadcast'
   ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: []
+  localPlugins: [],
+
+
+  keymaps: {
+    "editor:paste": "ctrl+v"
+  }
 };
