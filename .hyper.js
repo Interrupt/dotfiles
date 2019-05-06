@@ -2,6 +2,8 @@
 // which will not automatically be merged into this file.
 // See https://hyper.is#cfg for all currently supported options.
 
+startupCommands = ['C:\\Users\\chad.cuddigan\\clink\\startup.bat']
+
 module.exports = {
   config: {
 
@@ -86,8 +88,8 @@ module.exports = {
       prompt: "$E[0;31;40m$p$_$E[1;30;40mλ $E[0;37;40m"
     },
 
-    hyperRun: ['doskey ls=ls --color=auto $*', 'clear'],
-    hyperRunTab: ['doskey ls=ls --color=auto $*', 'clear'],
+    hyperRun: startupCommands,
+    hyperRunTab: startupCommands,
 
     // set to false for no bell
     bell: 'SOUND',
@@ -121,7 +123,7 @@ module.exports = {
     'hyperterm-paste',
     'hyper-run',
     //'hyper-statusline',
-    'hyper-gcp-status-line',
+    //'hyper-gcp-status-line',
     'hypercwd',
     'hyper-pane',
     'hyper-search',
