@@ -123,4 +123,4 @@ alias gitk='"/mnt/c/Program Files/Git/cmd/gitk.exe"'
 
 export LS_COLORS="$(vivid generate molokai)"
 
-eval $(keychain --eval id_rsa)
+eval $(keychain --eval id_rsa --eval id_ed25519)
