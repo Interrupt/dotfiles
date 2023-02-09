@@ -49,7 +49,7 @@ Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
-Plug 'tomasr/molokai'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " LSP
 Plug 'neovim/nvim-lspconfig' " Configurations for Nvim LSP
@@ -181,7 +181,7 @@ set ruler
 set number
 
 let no_buffers_menu=1
-colorscheme molokai
+colorscheme tokyonight-night 
 
 
 " Better command line completion 
