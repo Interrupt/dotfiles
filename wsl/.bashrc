@@ -116,11 +116,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#alias docker="docker.exe"
-
 # Alias some windows GUI apps
 alias gitk='"/mnt/c/Program Files/Git/cmd/gitk.exe"'
 
+# Better colors for listing filles
 export LS_COLORS="$(vivid generate molokai)"
 
-eval $(keychain --eval id_rsa --eval id_ed25519)
+# Make sure ssh-agent starts
+eval $(keychain --eval id_ed25519 --eval id_rsa)
+
+# Add Go Binaries to Path
+export PATH=${PATH}:`go env GOPATH`/bin
+
+# Fancy boot animation!
+./gif2ansi magus-anim.gif
