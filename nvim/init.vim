@@ -34,8 +34,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -51,12 +49,20 @@ Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
+" Neovim Tree
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
+
 " LSP
 Plug 'neovim/nvim-lspconfig' " Configurations for Nvim LSP
 
 " Navigator window
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
 Plug 'ray-x/navigator.lua'
+
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 
 " Better syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -173,6 +179,10 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
+" Disable the netrw file browser in favor of NeoTree
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
@@ -212,7 +222,8 @@ else
   
 endif
 
-
+" set termguicolors to enable highlight groups
+set termguicolors
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -275,8 +286,13 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-nnoremap <silent> <F3> :NERDTreeToggle<CR>
+"nnoremap <silent> <F2> :NERDTreeFind<CR>
+"nnoremap <silent> <F3> :NERDTreeToggle<CR>
+
+"" New NeoVimTree configuration
+nnoremap <silent> <F2> :NvimTreeFindFileToggle<CR>
+nnoremap <silent> <F3> :NvimTreeToggle<CR>
+
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -460,6 +476,12 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
@@ -493,6 +515,12 @@ let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 1
 
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+      \ 'out':        'botright 6new',
+\ }
+
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 augroup completion_preview_close
@@ -524,6 +552,7 @@ augroup go
   au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
   au FileType go imap <leader>dr <esc>:<C-u>GoDeclsDir<cr>
   au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
+  au FileType go nmap <leader>rd :GoDebugStart<cr> 
 
 augroup END
 
@@ -620,3 +649,55 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+-- Enable nvim-tree 
+require("nvim-tree").setup {
+    open_on_tab = true,
+    highlight_focused_file = true,
+    update_focused_file = {
+        enable = true
+    },
+    view = {
+        mappings = {
+            list = {
+                { key = "<Tab>", action = "" }
+            }
+        }
+    }
+} 
+
+local function tab_win_closed(winnr)
+  local api = require"nvim-tree.api"
+  local tabnr = vim.api.nvim_win_get_tabpage(winnr)
+  local bufnr = vim.api.nvim_win_get_buf(winnr)
+  local buf_info = vim.fn.getbufinfo(bufnr)[1]
+  local tab_wins = vim.tbl_filter(function(w) return w~=winnr end, vim.api.nvim_tabpage_list_wins(tabnr))
+  local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
+  if buf_info.name:match(".*NvimTree_%d*$") then            -- close buffer was nvim tree
+    -- Close all nvim tree on :q
+    if not vim.tbl_isempty(tab_bufs) then                      -- and was not the last window (not closed automatically by code below)
+      api.tree.close()
+    end
+  else                                                      -- else closed buffer was normal buffer
+    if #tab_bufs == 1 then                                    -- if there is only 1 buffer left in the tab
+      local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
+      if last_buf_info.name:match(".*NvimTree_%d*$") then       -- and that buffer is nvim tree
+        vim.schedule(function ()
+          if #vim.api.nvim_list_wins() == 1 then                -- if its the last buffer in vim
+            vim.cmd "quit"                                        -- then close all of vim
+          else                                                  -- else there are more tabs open
+            vim.api.nvim_win_close(tab_wins[1], true)             -- then close only the tab
+          end
+        end)
+      end
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("WinClosed", {
+  callback = function ()
+    local winnr = tonumber(vim.fn.expand("<amatch>"))
+    vim.schedule_wrap(tab_win_closed(winnr))
+  end,
+  nested = true
+})
