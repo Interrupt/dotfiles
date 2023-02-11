@@ -36,8 +36,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
@@ -49,12 +47,16 @@ Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
+" Fancier Statusline
+Plug 'nvim-lualine/lualine.nvim'
+
 " Neovim Tree
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
 
 " LSP
 Plug 'neovim/nvim-lspconfig' " Configurations for Nvim LSP
+Plug 'j-hui/fidget.nvim' " LSP Status updates
 
 " Navigator window
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
@@ -119,6 +121,12 @@ Plug 'jelera/vim-javascript-syntax'
 "" Lua Bundle
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'xolox/vim-lua-inspect'
+
+
+" " Extras
+Plug 'lukas-reineke/indent-blankline.nvim' " Add indentation guides even on blank lines
+Plug 'numToStr/Comment.nvim' "'gc' to comment visual regions/lines'
+Plug 'tpope/vim-sleuth' "Detect tabstop and shiftwidth automatically
 
 
 "*****************************************************************************
@@ -244,6 +252,10 @@ set titleold="Terminal"
 set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+
+"" Decrease updatetime
+set updatetime=250
+set signcolumn=yes
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -653,7 +665,6 @@ require'nvim-treesitter.configs'.setup {
 -- Enable nvim-tree 
 require("nvim-tree").setup {
     open_on_tab = true,
-    highlight_focused_file = true,
     update_focused_file = {
         enable = true
     },
@@ -701,3 +712,28 @@ vim.api.nvim_create_autocmd("WinClosed", {
   end,
   nested = true
 })
+
+-- Set lualine as statusline
+-- See `:help lualine.txt`
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    -- theme = 'onedark',
+    theme = 'horizon',
+    component_separators = '|',
+    section_separators = '',
+  },
+}
+
+-- Enable Comment.nvim
+require('Comment').setup()
+
+-- Enable `lukas-reineke/indent-blankline.nvim`
+-- See `:help indent_blankline.txt`
+require('indent_blankline').setup {
+  char = '┊',
+  show_trailing_blankline_indent = false,
+}
+
+-- Turn on lsp status information
+require('fidget').setup()
