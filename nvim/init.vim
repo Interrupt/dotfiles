@@ -45,7 +45,10 @@ Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'editor-bootstrap/vim-bootstrap-updater'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+
+" Color schemes
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Fancier Statusline
 Plug 'nvim-lualine/lualine.nvim'
@@ -175,6 +178,8 @@ set smartcase
 
 set fileformats=unix,dos,mac
 
+set scrolloff=8
+
 if exists('$SHELL')
     set shell=$SHELL
 else
@@ -199,8 +204,8 @@ set ruler
 set number
 
 let no_buffers_menu=1
-colorscheme tokyonight-night 
-
+" colorscheme tokyonight-night 
+colorscheme catppuccin-mocha
 
 " Better command line completion 
 set wildmenu
@@ -289,21 +294,12 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-"nnoremap <silent> <F2> :NERDTreeFind<CR>
-"nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 "" New NeoVimTree configuration
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
 nnoremap <silent> <F2> :NvimTreeFindFileToggle<CR>
 nnoremap <silent> <F3> :NvimTreeToggle<CR>
+nnoremap <silent> <leader>tt :NvimTreeFindFileToggle<CR>
 
 
 " grep.vim
@@ -313,8 +309,21 @@ let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
 
 " terminal emulation
-nnoremap <silent> <leader>sh :terminal<CR>
+nnoremap <silent> <leader>sh :rightbelow10 :sp <bar> :term<CR>
 
+" Easier navigation in terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-w>h <C-\><C-n><C-w>h
+tnoremap <C-w>j <C-\><C-n><C-w>j
+tnoremap <C-w>k <C-\><C-n><C-w>k
+tnoremap <C-w>l <C-\><C-n><C-w>l
+
+" Automatically open terminals in insert mode
+autocmd TermOpen term://* startinsert
+
+" Give terminal buffers a darker background color to stand out.
+" Most color schemes already do this for NvimTree, so hijack that.
+:hi link TerminalWindow NvimTreeNormal
 
 "*****************************************************************************
 "" Commands
@@ -747,4 +756,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = highlight_group,
   pattern = '*',
+})
+
+-- Make the terminal use a preset background color
+vim.api.nvim_create_augroup("_terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+  command = "setlocal winhighlight=Normal:TerminalWindow",
+  group = "_terminal",
 })
