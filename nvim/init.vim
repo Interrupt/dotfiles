@@ -77,6 +77,8 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 " Autocomplete snippets
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
+" Highlight active word
+Plug 'tzachar/local-highlight.nvim'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -736,6 +738,9 @@ require('lualine').setup {
 
 -- Enable Comment.nvim
 require('Comment').setup()
+
+-- Enable Local Highlight
+require('local-highlight').setup({})
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
