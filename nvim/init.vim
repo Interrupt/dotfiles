@@ -37,7 +37,6 @@ Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'dense-analysis/ale'
-Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 
 " Color schemes
@@ -93,6 +92,9 @@ Plug 'xolox/vim-session'
 "" Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" Dashboard
+Plug 'glepnir/dashboard-nvim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -222,12 +224,13 @@ if has("gui_running")
 else
   let g:CSApprox_loaded = 1
 
-  " IndentLine
-  let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = ''
-  let g:indentLine_char = '┆'
-  let g:indentLine_faster = 1
-
+  if $COLORTERM == 'gnome-terminal'
+    set term=gnome-256color
+  else
+    if $TERM == 'xterm'
+      set term=xterm-256color
+    endif
+  endif
   
 endif
 
@@ -266,6 +269,10 @@ nnoremap N Nzzzv
 if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
+
+" Disable indent guides on some buffers
+let g:indent_blankline_buftype_exclude = ['terminal', 'dashboard', 'nofile']
+let g:indent_blankline_filetype_exclude = ['lspinfo', 'packer', 'checkhealth', 'help', '', 'dashboard', 'nofile'] 
 
 
 "*****************************************************************************
@@ -605,13 +612,21 @@ endif
 " Go Autocomplete!
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-
-" Setup LSP!
-lua require'navigator'.setup()
-" lua require'lspconfig'.gopls.setup{}
 let g:coq_settings = { 'auto_start': 'shut-up' }
 
+" lua setup for plugins
 lua << EOF
+
+require('dashboard').setup {
+  theme = 'hyper',
+  hide = {
+    tabline = true
+  }
+}
+
+require'navigator'.setup({
+  transparency = 100
+})
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -627,8 +642,10 @@ require'nvim-treesitter.configs'.setup {
 -- Enable nvim-tree 
 require("nvim-tree").setup {
     open_on_tab = true,
+    prefer_startup_root = true,
     update_focused_file = {
-        enable = true
+        enable = true,
+        update_root = true
     },
     view = {
         mappings = {
