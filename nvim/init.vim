@@ -96,6 +96,9 @@ Plug 'honza/vim-snippets'
 " Dashboard
 Plug 'glepnir/dashboard-nvim'
 
+" Org Mode
+Plug 'nvim-orgmode/orgmode'
+
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -619,6 +622,35 @@ lua << EOF
 
 require('dashboard').setup {
   theme = 'hyper',
+  config = {
+    week_header = {
+      enable = true,
+    },
+    packages = { enable = false },
+    shortcut = {
+      { desc = ' Update', group = '@property', action = 'PlugInstall', key = 'u' },
+      {
+        icon = ' ',
+        icon_hl = '@variable',
+        desc = 'Files',
+        group = 'Label',
+        action = 'Telescope find_files',
+        key = 'f',
+      },
+      {
+        desc = ' Live Grep',
+        group = 'DiagnosticHint',
+        action = 'Telescope live_grep',
+        key = 'g',
+      },
+      {
+        desc = ' Check Health',
+        group = 'Number',
+        action = 'checkhealth',
+        key = 'c',
+      },
+    }
+  },
   hide = {
     tabline = true
   }
@@ -628,6 +660,9 @@ require'navigator'.setup({
   transparency = 100
 })
 
+-- Load custom treesitter grammar for org filetype
+require('orgmode').setup_ts_grammar()
+
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -635,9 +670,15 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = {'org'}
   },
+  ensure_installed = {'org','go'}
 }
+
+require('orgmode').setup({
+  org_agenda_files = {'~/Documents/Notes/org/*', '~/my-orgs/**/*'},
+  org_default_notes_file = '~/Documents/Notes/org/refile.org',
+})
 
 -- Enable nvim-tree 
 require("nvim-tree").setup {
