@@ -73,6 +73,9 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Highlight active word
 Plug 'tzachar/local-highlight.nvim'
 
+" Better multiline editing
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
