@@ -127,12 +127,6 @@ Plug 'mattn/emmet-vim'
 Plug 'jelera/vim-javascript-syntax'
 
 
-" lua
-"" Lua Bundle
-Plug 'xolox/vim-lua-ftplugin'
-Plug 'xolox/vim-lua-inspect'
-
-
 " " Extras
 Plug 'lukas-reineke/indent-blankline.nvim' " Add indentation guides even on blank lines
 Plug 'numToStr/Comment.nvim' "'gc' to comment visual regions/lines'
