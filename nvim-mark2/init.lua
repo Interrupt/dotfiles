@@ -29,40 +29,8 @@ vim.api.nvim_set_var('lsp_servers',
                     staticcheck = true,
                 },
             },
-            settings = {
-
-            }
-        }
-        --[[
-        {
-            name     = 'cmake',
-            settings = {
-                CMake = {
-                    filetypes = { 'cmake', 'CMakeLists.txt', 'CMakeCache.txt' },
-                },
-            },
         },
-        {
-            name = 'clangd',
-            settings = {
-                clangd = {
-                    --      excludeArgs = { '-stdlib=libc++' }
-                },
-            },
-        },
-        {
-            name = 'pyright',
-        },
-        {
-            name = 'jsonls', -- for json formatting
-        },
-        {
-            name = 'ltex', -- for markdown lsp
-        },
-        {
-            name = 'esbonio', -- for reStructuredText lsp
-        }
-        ]] --
+        -- Add more LSP Servers here as needed!
     }
 )
 
@@ -112,6 +80,7 @@ vim.api.nvim_set_var('treesitter_servers',
         'cmake',
         'norg',
         'vim', -- This solves syntax highlighting in {.lua} files
+        'go',
     }
 )
 

@@ -16,7 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     -- LSP Support
-    { 'neovim/nvim-lspconfig',                     lazy = false }, -- Required
+    {
+        'neovim/nvim-lspconfig',
+        event = { "BufReadPre", "BufNewFile" },
+    }, -- Required
     {
         'williamboman/mason.nvim',
         build = function()
@@ -27,21 +30,25 @@ require('lazy').setup({
     { 'WhoIsSethDaniel/mason-tool-installer.nvim', lazy = false }, -- For installing dap, linters, formatters, etc.
 
     -- Autocompletion
-    { 'hrsh7th/nvim-cmp',                          lazy = false },
-    { 'hrsh7th/cmp-buffer',                        lazy = false },
-    { 'hrsh7th/cmp-path',                          lazy = false },
-    { 'hrsh7th/cmp-nvim-lua',                      lazy = false },
-    { 'hrsh7th/cmp-nvim-lsp',                      lazy = false },
-    { 'L3MON4D3/LuaSnip',                          lazy = false },
-    { 'saadparwaiz1/cmp_luasnip',                  lazy = false },
-    { 'rafamadriz/friendly-snippets',              lazy = false },
-    { 'onsails/lspkind.nvim',                      lazy = false },
-    { "nvim-treesitter/nvim-treesitter",           lazy = false, build = ":TSUpdate" },
-    { "nvim-tree/nvim-tree.lua",                   lazy = false },
+    {
+        'hrsh7th/nvim-cmp',
+        event = { "InsertEnter", "CmdlineEnter" },
+        dependencies = {
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-nvim-lsp',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+        }
+    },
+    { 'rafamadriz/friendly-snippets',    lazy = false },
+    { 'onsails/lspkind.nvim',            lazy = false },
+    { "nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate" },
+    { "nvim-tree/nvim-tree.lua",         lazy = false },
     {
         'nvim-telescope/telescope.nvim',
         version = '*',
-        lazy = false,
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim',
@@ -54,14 +61,27 @@ require('lazy').setup({
         tag = 'v1.2.2',
         lazy = false
     },
-    { 'nvim-lualine/lualine.nvim',           lazy = false },
+    { 'nvim-lualine/lualine.nvim',           event = "VeryLazy" },
     { 'lukas-reineke/indent-blankline.nvim', lazy = false },
     { 'numToStr/Comment.nvim',               lazy = false },
     { 'ggandor/leap.nvim',                   lazy = false },
     { "akinsho/bufferline.nvim",             dependencies = "nvim-tree/nvim-web-devicons", lazy = false },
     { 'windwp/nvim-autopairs',               lazy = false },
-    { 'lewis6991/gitsigns.nvim',             lazy = false },
+    { 'lewis6991/gitsigns.nvim',             event = "BufEnter" },
     { 'David-Kunz/markid',                   lazy = false }, -- highlight same-name identifiers with the same colors
+    {
+        "folke/zen-mode.nvim",
+        cmd = "ZenMode",
+        config = function()
+            vim.api.nvim_set_hl(0, 'ZenBg', { ctermbg = 0 })
+        end
+    },
+    {
+        "nmac427/guess-indent.nvim",
+        config = function()
+            require("guess-indent").setup()
+        end
+    },
 
     --- Themes
     {
@@ -122,7 +142,7 @@ require('lazy').setup({
     { 'terrortylor/nvim-comment',            lazy = false },
     { 'lukas-reineke/indent-blankline.nvim', lazy = false },
     { 'akinsho/toggleterm.nvim',             lazy = false },
-    { 'j-hui/fidget.nvim',                   lazy = false },
+    { 'j-hui/fidget.nvim',                   event = "LspAttach" },
     { 'glepnir/dashboard-nvim',              lazy = false },
     {
         'rohit-kumar-j/cmake-tools.nvim',
