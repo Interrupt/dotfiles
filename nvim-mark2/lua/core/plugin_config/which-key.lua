@@ -11,15 +11,14 @@ end
 
 local wk = require("which-key")
 local mappings = {
-    w     = { "<cmd>w<CR>", "Save" },                                                               -- DONE
-    q     = { "<cmd>q<CR>", "Quit" },                                                               -- DONE
-    Q     = { "<cmd>wq<CR>", "Save & Quit" },                                                       -- DONE
-    x     = { "<cmd>bdelete<CR>", "Close" },                                                        -- DONE
-    e     = { "<cmd>:lua toggle_nvimtree()<CR>", "Explorer Toggle" },                               -- DONE
-    r     = { "<cmd>:lua require('nvim-tree.api').tree.toggle(false, true)<CR>", "Explorer Peek" }, -- DONE
-    f     = { "<cmd>:Telescope find_files<CR>", "Explorer Tree Collapse" },                         -- DONE
-    C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" },                                                -- DONE
-    [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },                                                  --
+    w     = { "<cmd>w<CR>", "Save" },                                       -- DONE
+    q     = { "<cmd>q<CR>", "Quit" },                                       -- DONE
+    Q     = { "<cmd>wq<CR>", "Save & Quit" },                               -- DONE
+    x     = { "<cmd>bdelete<CR>", "Close" },                                -- DONE
+    e     = { "<cmd>:NvimTreeFindFileToggle<CR>", "Explorer Toggle" },      -- DONE
+    f     = { "<cmd>:Telescope find_files<CR>", "Explorer Tree Collapse" }, -- DONE
+    C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" },                        -- DONE
+    [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },                          --
     c     = {
         -- Symbol : CMake
         name = "CMake",
@@ -154,6 +153,11 @@ local mappings = {
         l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
         D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
         L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
+    },
+    s     = {
+        -- Symbol : Shell
+        name = "Shell",
+        h = { "<cmd>:rightbelow18 :sp <bar> :term<CR>", "Open Shell Console" },
     },
 }
 

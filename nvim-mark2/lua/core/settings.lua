@@ -17,6 +17,15 @@ vim.api.nvim_set_keymap('n', '<S-Up>', '<cmd>resize +2<CR>', { noremap = true, s
 vim.api.nvim_set_keymap('n', '<S-Down>', '<cmd>resize -2<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-S-Left>', '<cmd>vertical resize +2<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<C-S-Right>', '<cmd>vertical resize -2<CR>', { silent = true })
+
+-- Better terminal navigation
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>h', '<C-\\><C-n><C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>j', '<C-\\><C-n><C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>k', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>l', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
+
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -100,6 +109,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     group = highlight_group,
     pattern = '*',
+})
+
+-- Open terminals in insert mode
+vim.api.nvim_create_autocmd('TermOpen', {
+    pattern = 'term://*',
+    callback = function()
+        vim.cmd.startinsert()
+    end
+})
+
+-- Make the terminal use a preset background color
+vim.api.nvim_set_hl(0, 'TerminalWindow', { link = 'NvimTreeNormal' })
+vim.api.nvim_create_augroup("_terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+    command = "setlocal winhighlight=Normal:TerminalWindow",
+    group = "_terminal",
 })
 
 -- [[ Edit markdown tables on save with pandoc ]]
