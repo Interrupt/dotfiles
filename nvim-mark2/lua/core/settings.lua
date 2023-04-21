@@ -6,6 +6,7 @@ local vim = vim
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Common remaps
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = false })
@@ -25,9 +26,39 @@ vim.api.nvim_set_keymap('t', '<C-w>j', '<C-\\><C-n><C-w>j', { noremap = true, si
 vim.api.nvim_set_keymap('t', '<C-w>k', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<C-w>l', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
 
+-- Stay in visual mode after indenting
+vim.api.nvim_set_keymap('v', '<', "<gv", { silent = true })
+vim.api.nvim_set_keymap('v', '>', ">gv", { silent = true })
+
+-- Moving visual mode selections up and down
+vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- Move between tabs
+vim.api.nvim_set_keymap('n', '<Tab>', ':BufferLineCycleNext<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { silent = true })
+
+
+-- Fix common typos
+vim.cmd([[
+    cnoreabbrev W! w!
+    cnoreabbrev Q! q!
+    cnoreabbrev Qall! qall!
+    cnoreabbrev Wq wq
+    cnoreabbrev Wa wa
+    cnoreabbrev wQ wq
+    cnoreabbrev WQ wq
+    cnoreabbrev W w
+    cnoreabbrev Q q
+    cnoreabbrev Qall qall
+]])
+
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Set a cursor gutter
+vim.o.scrolloff = 8
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -119,6 +150,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
 })
 
+-- Disable line numbers in terminals
+vim.api.nvim_create_autocmd('TermOpen', {
+    pattern = "*",
+    command = "setlocal nonumber norelativenumber",
+})
+
 -- Make the terminal use a preset background color
 vim.api.nvim_set_hl(0, 'TerminalWindow', { link = 'NvimTreeNormal' })
 vim.api.nvim_create_augroup("_terminal", { clear = true })
@@ -127,17 +164,42 @@ vim.api.nvim_create_autocmd("TermOpen", {
     group = "_terminal",
 })
 
--- [[ Edit markdown tables on save with pandoc ]]
--- Define the is_markdown function
-function is_markdown()
-    local extension = vim.fn.expand('%:e')
-    return extension == 'md' or extension == 'markdown'
+-- Close nvim-tree if it was the last thing open in a tab
+--[[
+local function tab_win_closed(winnr)
+    local api = require "nvim-tree.api"
+    local tabnr = vim.api.nvim_win_get_tabpage(winnr)
+    local bufnr = vim.api.nvim_win_get_buf(winnr)
+    local buf_info = vim.fn.getbufinfo(bufnr)[1]
+    local tab_wins = vim.tbl_filter(function(w) return w ~= winnr end, vim.api.nvim_tabpage_list_wins(tabnr))
+    local tab_bufs = vim.tbl_map(vim.api.nvim_win_get_buf, tab_wins)
+    if buf_info.name:match(".*NvimTree_%d*$") then -- close buffer was nvim tree
+        -- Close all nvim tree on :q
+        if not vim.tbl_isempty(tab_bufs) then    -- and was not the last window (not closed automatically by code below)
+            api.tree.close()
+        end
+    else                                                  -- else closed buffer was normal buffer
+        if #tab_bufs == 1 then                            -- if there is only 1 buffer left in the tab
+            local last_buf_info = vim.fn.getbufinfo(tab_bufs[1])[1]
+            if last_buf_info.name:match(".*NvimTree_%d*$") then -- and that buffer is nvim tree
+                vim.schedule(function()
+                    if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
+                        vim.cmd "quit"                    -- then close all of vim
+                    else                                  -- else there are more tabs open
+                        vim.api.nvim_win_close(tab_wins[1], true) -- then close only the tab
+                    end
+                end)
+            end
+        end
+    end
 end
 
--- Define the BufWritePost autocommand
-vim.cmd([[
-  augroup pandoc
-    autocmd!
-    autocmd BufWritePost *.md if luaeval("is_markdown()") | silent execute '!pandoc % --lua-filter=html_details -t markdown-simple_tables -o %' | edit | endif
-  augroup END
-]])
+vim.api.nvim_create_autocmd("WinClosed", {
+    callback = function()
+        local winnr = tonumber(vim.fn.expand("<amatch>"))
+        vim.schedule_wrap(tab_win_closed(winnr))
+    end,
+    nested = true
+})
+]]
+   --
