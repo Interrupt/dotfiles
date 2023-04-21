@@ -1,7 +1,7 @@
 local lualine = require("lualine")
 
 local cmake = require("cmake-tools")
-local icons = require("core.plugin_config.icons")
+local icons = require("plugin_config.icons")
 
 -- Credited to [evil_lualine](https://github.com/nvim-lualine/lualine.nvim/blob/master/examples/evil_lualine.lua)
 local conditions = {

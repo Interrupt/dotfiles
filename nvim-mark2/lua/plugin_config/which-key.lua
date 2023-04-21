@@ -19,9 +19,9 @@ local mappings = {
     f     = { "<cmd>:Telescope find_files<CR>", "Explorer Tree Collapse" }, -- DONE
     C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" },                        -- DONE
     [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },                          --
-    t     = {
+    f     = {
         -- Symbol : Telescope
-        name = "Telescope",
+        name = "Telescope Finder",
         f = { ":Telescope find_files<cr>", "Find Files" },                               -- DONE
         g = { ":Telescope live_grep<cr>", "Live Grep" },                                 -- DONE
         b = { ":Telescope buffers<cr>", "Buffers" },                                     -- DONE
