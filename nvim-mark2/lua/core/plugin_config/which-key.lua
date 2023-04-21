@@ -19,28 +19,6 @@ local mappings = {
     f     = { "<cmd>:Telescope find_files<CR>", "Explorer Tree Collapse" }, -- DONE
     C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" },                        -- DONE
     [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },                          --
-    c     = {
-        -- Symbol : CMake
-        name = "CMake",
-        g = { "<cmd>CMakeGenerate<cr>", "CMake Generate" },
-        b = { "<cmd>CMakeBuild<cr>", "CMake Build" },
-        r = { "<cmd>CMakeRun<cr>", "CMake Run" },
-        d = { "<cmd>CMakeDebug<cr>", "CMake Debug" },
-        O = { "<cmd>CMakeOpen<cr>", "CMake Open Console" },
-        C = { "<cmd>CMakeClose<cr>", "CMake Close Console" },
-        i = { "<cmd>CMakeInstall<cr>", "CMake Install" },
-        c = { "<cmd>CMakeClean<cr>", "CMake Clean" },
-        s = { "<cmd>CMakeStop<cr>", "CMake Stop" },
-        S = {
-            name = "Select",
-            b = { "<cmd>CMakeSelectBuildType<cr>", "Select BuildType" },
-            t = { "<cmd>CMakeSelectBuildTarget<cr>", "Select BuildTarget" },
-            l = { "<cmd>CMakeSelectLaunchTarget<cr>", "Select LaunchTarget" },
-            k = { "<cmd>CMakeSelectKit<cr>", "Select Kit" },
-            c = { "<cmd>CMakeSelectConfigurePreset<cr>", "Select ConfigurePreset" },
-            p = { "<cmd>CMakeSelectBuildPreset<cr>", "Select BuildPreset" },
-        },
-    },
     t     = {
         -- Symbol : Telescope
         name = "Telescope",

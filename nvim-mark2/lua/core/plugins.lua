@@ -82,23 +82,14 @@ require('lazy').setup({
             require("guess-indent").setup()
         end
     },
+    { "mg979/vim-visual-multi",      lazy = false }, -- better multi-line editing
 
     --- Themes
-    {
-        'projekt0n/github-nvim-theme',
-        tag = 'v0.0.7',
-        lazy = false,
-        -- opts = {},
-        -- opts = {
-        --     experiments = {
-        --         new_palettes = false
-        --     },
-        -- },
-    },
-    { 'rose-pine/neovim',        name = 'rose-pine',  lazy = false },
-    { 'rebelot/kanagawa.nvim',   name = 'kanagawa',   lazy = false },
-    { 'catppuccin/nvim',         name = 'catppuccin', lazy = false },
-    { 'folke/tokyonight.nvim',   lazy = false },
+    { 'projekt0n/github-nvim-theme', tag = 'v0.0.7',      lazy = false },
+    { 'rose-pine/neovim',            name = 'rose-pine',  lazy = false },
+    { 'rebelot/kanagawa.nvim',       name = 'kanagawa',   lazy = false },
+    { 'catppuccin/nvim',             name = 'catppuccin', lazy = false },
+    { 'folke/tokyonight.nvim',       lazy = false },
     --{ 'loctvl842/monokai-pro.nvim',       lazy = false },
     --{ 'AhmedAbdulrahman/vim-aylin',       lazy = false }, --         name = 'vim-aylin' ,lazy=false},
     --{ 'mcchrish/zenbones.nvim',           dependencies = 'rktjmp/lush.nvim', lazy = false },
@@ -107,15 +98,15 @@ require('lazy').setup({
     --{ 'kaiuri/nvim-juliana',              lazy = false },
     --{ 'EdenEast/nightfox.nvim',           lazy = false },
     --{ 'shaunsingh/nord.nvim',             lazy = false },
-    { 'navarasu/onedark.nvim',   lazy = false },
+    { 'navarasu/onedark.nvim',       lazy = false },
     --{ 'nyoom-engineering/oxocarbon.nvim', lazy = false },
-    { 'tiagovla/tokyodark.nvim', lazy = false },
+    { 'tiagovla/tokyodark.nvim',     lazy = false },
     --{ 'olimorris/onedarkpro.nvim',        lazy = false },
     --{ 'sam4llis/nvim-tundra',             lazy = false },
     --{ 'bluz71/vim-moonfly-colors',        lazy = false },
 
     --
-    { 'folke/twilight.nvim',     lazy = false },
+    { 'folke/twilight.nvim',         lazy = false },
     {
         'folke/todo-comments.nvim',
         lazy = false,
