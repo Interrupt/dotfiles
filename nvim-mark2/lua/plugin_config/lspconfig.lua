@@ -44,6 +44,15 @@ require('mason-tool-installer').setup(
 -- LSP SETUP
 local on_attach = function(client, bufnr)
     -- Using default Keymaps
+
+    -- xray signature setup
+    require "lsp_signature".on_attach({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        hint_prefix = " ",
+        handler_opts = {
+            border = "rounded"
+        }
+    }, bufnr)
 end
 
 -- Try to auto-setup some capabilities
@@ -55,14 +64,25 @@ for _, lsp in ipairs(lsp_servers) do
         on_attach = on_attach,
         capabilities = lsp_capabilities,
     }
+
+    local signs = {
+        Error = " ", Warn = " ", Hint = " ", Info = " "
+    }
+    for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, {
+            text = icon, texthl = hl, numhl = hl
+        })
+    end
 end
 
-local signs = {
-    Error = " ", Warn = " ", Hint = " ", Info = " "
-}
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {
-        text = icon, texthl = hl, numhl = hl
-    })
-end
+-- LINTER SETUP
+
+-- Use null-ls to help with making using linters way easier
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.revive
+    },
+})

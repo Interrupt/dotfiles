@@ -110,8 +110,7 @@ require('lazy').setup({
     {
         'folke/todo-comments.nvim',
         lazy = false,
-        dependencies =
-        'nvim-lua/plenary.nvim'
+        dependencies = 'nvim-lua/plenary.nvim'
     },
     { 'folke/zen-mode.nvim',                 lazy = false },
     -- {
@@ -137,7 +136,7 @@ require('lazy').setup({
     { 'glepnir/dashboard-nvim',              lazy = false },
     {
         'rohit-kumar-j/cmake-tools.nvim',
-        deendencies = {
+        dependencies = {
             'nvim-tree/nvim-web-devicons',
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim',
@@ -158,7 +157,7 @@ require('lazy').setup({
                         folds = true,
                         icon_preset = 'varied', -- basic, diamond, varied
                     },
-                },                              -- Adds pretty icons to your documents
+                }, -- Adds pretty icons to your documents
                 -- ["core.norg.dirman"] = {      -- Manages Neorg workspaces
                 --     config = {
                 --         workspaces = {
@@ -172,10 +171,27 @@ require('lazy').setup({
         dependencies = { { "nvim-lua/plenary.nvim" } },
     },
 
-    -- Go IDE
+    -- Go IDE! Also mixing in some signature helpers and linters
     {
         "fatih/vim-go",
         build = ":GoInstallBinaries",
         lazy  = false,
+    },
+    {
+        'ray-x/lsp_signature.nvim', -- function signatures as you type!
+        lazy = false,
+        -- configured in lspconfig.lua!
+    },
+    { 'jose-elias-alvarez/null-ls.nvim', lazy = false, },
+    { 'kosayoda/nvim-lightbulb', -- code actions lightbulb icon
+        lazy = false,
+        config = function()
+            require('nvim-lightbulb').setup({
+                autocmd = { enabled = true },
+            })
+
+            -- better icon
+            vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LspDiagnosticsDefaultInformation" })
+        end
     },
 })

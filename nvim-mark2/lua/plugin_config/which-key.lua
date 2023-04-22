@@ -3,7 +3,7 @@ function toggle_nvimtree()
         vim.cmd.wincmd 'p'
     else
         vim.cmd('NvimTreeFindFile') -- Find currently open file and set Focus
-        vim.cmd('NvimTreeFocus')    -- Focus on the Opened tree
+        vim.cmd('NvimTreeFocus') -- Focus on the Opened tree
     end
 end
 
@@ -11,25 +11,25 @@ end
 
 local wk = require("which-key")
 local mappings = {
-    w     = { "<cmd>w<CR>", "Save" },                                       -- DONE
-    q     = { "<cmd>q<CR>", "Quit" },                                       -- DONE
-    Q     = { "<cmd>wq<CR>", "Save & Quit" },                               -- DONE
-    x     = { "<cmd>bdelete<CR>", "Close" },                                -- DONE
-    e     = { "<cmd>:NvimTreeFindFileToggle<CR>", "Explorer Toggle" },      -- DONE
+    w     = { "<cmd>w<CR>", "Save" }, -- DONE
+    q     = { "<cmd>q<CR>", "Quit" }, -- DONE
+    Q     = { "<cmd>wq<CR>", "Save & Quit" }, -- DONE
+    x     = { "<cmd>bdelete<CR>", "Close" }, -- DONE
+    e     = { "<cmd>:NvimTreeFindFileToggle<CR>", "Explorer Toggle" }, -- DONE
     f     = { "<cmd>:Telescope find_files<CR>", "Explorer Tree Collapse" }, -- DONE
-    C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" },                        -- DONE
-    [";"] = { "<cmd>Dashboard<CR>", "Dashboard" },                          --
+    C     = { "<cmd>e $MYVIMRC<CR>", "Edit VIMRC" }, -- DONE
+    [";"] = { "<cmd>Dashboard<CR>", "Dashboard" }, --
     f     = {
         -- Symbol : Telescope
         name = "Telescope Finder",
-        f = { ":Telescope find_files<cr>", "Find Files" },                               -- DONE
-        g = { ":Telescope live_grep<cr>", "Live Grep" },                                 -- DONE
-        b = { ":Telescope buffers<cr>", "Buffers" },                                     -- DONE
-        r = { ":Telescope resume<cr>", "Resume" },                                       -- DONE
-        t = { ":TodoTelescope<cr>", "TODO List" },                                       -- DONE
-        p = { ":Telescope colorscheme preview=true<cr>", "Color Scheme Preview" },       -- DONE
+        f = { ":Telescope find_files<cr>", "Find Files" }, -- DONE
+        g = { ":Telescope live_grep<cr>", "Live Grep" }, -- DONE
+        b = { ":Telescope buffers<cr>", "Buffers" }, -- DONE
+        r = { ":Telescope resume<cr>", "Resume" }, -- DONE
+        t = { ":TodoTelescope<cr>", "TODO List" }, -- DONE
+        p = { ":Telescope colorscheme preview=true<cr>", "Color Scheme Preview" }, -- DONE
         e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },           -- DONE
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" }, -- DONE
         S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, -- DONE
     },
     g     = {
@@ -138,6 +138,14 @@ local mappings = {
         h = { "<cmd>:rightbelow18 :sp <bar> :term<CR>", "Open Shell Console" },
     },
 }
+
+vim.keymap.set({ 'n' }, '<C-k>', function()
+    require('lsp_signature').toggle_float_win()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+vim.keymap.set({ 'n' }, '<Leader>k', function()
+    vim.lsp.buf.signature_help()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 local opts = { prefix = '<leader>' }
 

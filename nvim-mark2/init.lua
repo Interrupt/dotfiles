@@ -1,5 +1,5 @@
 -- Globals
-vim.api.nvim_set_var('debug', false)                    -- For debugging o/p
+vim.api.nvim_set_var('debug', false) -- For debugging o/p
 vim.api.nvim_set_var('copy_to_single_clipboard', false) -- Copy with y . Only tested to win32 and wsl
 
 -------------------------------------------------
@@ -37,6 +37,8 @@ vim.api.nvim_set_var('lsp_servers',
 -- Global LSP Linters
 vim.api.nvim_set_var('lsp_linters',
     {
+        'revive', -- go
+        --'golangci-lint', -- go
         --'luacheck', -- lua
         --'flake8',   -- python
         --'cpplint',  -- C++
