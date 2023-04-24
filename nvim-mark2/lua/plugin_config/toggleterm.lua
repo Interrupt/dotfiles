@@ -23,6 +23,6 @@ require("toggleterm").setup({
     direction = 'float',
     size = 40,
     float_opts = {
-        border = "double",
+        border = "curved",
     },
 })

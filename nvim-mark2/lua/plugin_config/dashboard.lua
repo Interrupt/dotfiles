@@ -6,68 +6,39 @@ local default_banner = {
 	"  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ",
 	"  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ",
 }
-local bison_head = {
-	"          .                                                      .",
-	"        .n                   .                 .                  n.",
-	"  .   .dP                  dP                   9b                 9b.    .",
-	" 4    qXb         .       dX                     Xb       .        dXp     t",
-	"dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb",
-	"9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP",
-	" 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP",
-	"  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'",
-	"    `9XXXXXXXXXXXP' `9XX'   DIE    `98v8P'  HUMAN   `XXP' `9XXXXXXXXXXXP'",
-	"        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~",
-	"                        )b.  .dbo.dP'`v'`9b.odb.  .dX(",
-	"                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.",
-	"                     dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb",
-	"                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb",
-	"                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP",
-	"                     `'      9XXXXXX(   )XXXXXXP      `'",
-	"                              XXXX X.`v'.X XXXX",
-	"                              XP^X'`b   d'`X^XX",
-	"                              X. 9  `   '  P )X",
-	"                              `b  `       '  d'",
-	"                               `             '"
-}
-local custom_banner = {
-	"",
-	"",
-	" ⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂ ",
-	" ⣿⣿⣿⡷⠊⡢⡹⣦⡑⢂⢕⢂⢕⢂⢕⢂⠕⠔⠌⠝⠛⠶⠶⢶⣦⣄⢂⢕⢂⢕ ",
-	" ⣿⣿⠏⣠⣾⣦⡐⢌⢿⣷⣦⣅⡑⠕⠡⠐⢿⠿⣛⠟⠛⠛⠛⠛⠡⢷⡈⢂⢕⢂ ",
-	" ⠟⣡⣾⣿⣿⣿⣿⣦⣑⠝⢿⣿⣿⣿⣿⣿⡵⢁⣤⣶⣶⣿⢿⢿⢿⡟⢻⣤⢑⢂ ",
-	" ⣾⣿⣿⡿⢟⣛⣻⣿⣿⣿⣦⣬⣙⣻⣿⣿⣷⣿⣿⢟⢝⢕⢕⢕⢕⢽⣿⣿⣷⣔ ",
-	" ⣿⣿⠵⠚⠉⢀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣗⢕⢕⢕⢕⢕⢕⣽⣿⣿⣿⣿ ",
-	" ⢷⣂⣠⣴⣾⡿⡿⡻⡻⣿⣿⣴⣿⣿⣿⣿⣿⣿⣷⣵⣵⣵⣷⣿⣿⣿⣿⣿⣿⡿ ",
-	" ⢌⠻⣿⡿⡫⡪⡪⡪⡪⣺⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃ ",
-	" ⠣⡁⠹⡪⡪⡪⡪⣪⣾⣿⣿⣿⣿⠋⠐⢉⢍⢄⢌⠻⣿⣿⣿⣿⣿⣿⣿⣿⠏⠈ ",
-	" ⡣⡘⢄⠙⣾⣾⣾⣿⣿⣿⣿⣿⣿⡀⢐⢕⢕⢕⢕⢕⡘⣿⣿⣿⣿⣿⣿⠏⠠⠈ ",
-	" ⠌⢊⢂⢣⠹⣿⣿⣿⣿⣿⣿⣿⣿⣧⢐⢕⢕⢕⢕⢕⢅⣿⣿⣿⣿⡿⢋⢜⠠⠈ ",
-	" ⠄⠁⠕⢝⡢⠈⠻⣿⣿⣿⣿⣿⣿⣿⣷⣕⣑⣑⣑⣵⣿⣿⣿⡿⢋⢔⢕⣿⠠⠈ ",
-	" ⠨⡂⡀⢑⢕⡅⠂⠄⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⢔⢕⢕⣿⣿⠠⠈ ",
-	" ⠄⠪⣂⠁⢕⠆⠄⠂⠄⠁⡀⠂⡀⠄⢈⠉⢍⢛⢛⢛⢋⢔⢕⢕⢕⣽⣿⣿⠠⠈ ",
-	"",
-	"",
-}
-local neo_land = {
-	'',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣤⣄⣀⣆⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⢛⣻⣿⠳⣽⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣼⣿⣿N⣿⣿⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⣰⣿⣿⣿⡿⣻⢟⣼⣿⣿⠟⣩E⣿⣿⣿⣿⣮⣿⣆⡀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⣰⣿⣿⢋⡿⠑⠋⣾⣿⣿⣇⠳⢿O⣿⠹⠿⢿⣿⣻⣿⡿⠋⠀⠀⠀',
-	'⠀⠀⠀⣰⣟⡽⠷⠋⠀⠀⠀⠇⣿⣿⣿⣿LAND⣶⡄⠾⠛⠙⣷⣄⡀⠀⠀',
-	'⠀⢀⡾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠻⡹⣿⡿⢿⣿⣿⣿⣿⣿⣿⣶⣆⡘⠷⣉⠆⠀',
-	'⠐⠉⠀⠀⠀⠀⠀⠀⢀⣴⣶⣶⣶⣧⣝⣷⣄⠈⠙⢿⡏⢻⢻⢻⣿⣷⡀⠈⠑⠄',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⠋⠀⠀⠉⠛⢿⣷⣄⡀⠀⠹⠀⠀⣼⣿⡟⡇⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣧⡀⠀⠀⢀⡠⣬⣿⣿⣿⣶⣿⣿⣿⣿⠇⠃⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⢷⣶⣦⣬⣿⣦⣌⠭⠿⠟⠋⢀⠏⠀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠒⠛⠛⠿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀',
-	'⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠶⠄⠀⠀⠀⠀⠀',
-	'',
+
+local rogue_banner = {
+	" Welcome back to NEOVIM                                  ",
+	" You hear a noise                |------|                ",
+	"                                 |....>.|                ",
+	"             |------|       -----|.{....+                ",
+	"             |.k....+#######+.m.....|---|                ",
+	"             |...@..|       |....m..|                    ",
+	"             |------|       |-------|                    ",
+	"                                                         ",
+	"                                                         ",
 }
 
-vim.g.dashboard_default_executive = 'telescope'
+local rogue_banner_2 = {
+	" Welcome back to NEOVIM                                  ",
+	" You hear a noise                                        ",
+	"                                                         ",
+	"              ╔════════╗                                 ",
+	"              ║........║         ╔════════════╗          ",
+	"              ║..@.....+░░░░░░░░░+.........$..║          ",
+	"              ║.....k..║         ║.m....╔═════╝          ",
+	"              ╚════════╝         ║......╚═╗              ",
+	"                                 ║.......>║              ",
+	"                                 ║{...m.╔═╝              ",
+	"                                 ╚══════╝                ",
+	"                                                         ",
+	"                                                         ",
+}
+
+
+-- ░▒▓ │┐└─┘┌ █▄▌▐▀ ║╗╝╚╔═
+
+-- vim.g.dashboard_default_executive = 'telescope'
 
 local home = os.getenv('HOME')
 local db = require('dashboard')
@@ -75,16 +46,18 @@ local db = require('dashboard')
 db.setup({
 	theme = 'hyper',
 	config = {
-		header = default_banner,
+		header = rogue_banner_2,
 		-- week_header = {
 		--      enable = true,
 		-- },
 		shortcut = {
 			{
-				desc = ' MasonInstall',
-				group = '@property',
-				action = 'PackerSync',
-				key = 'u'
+				icon = ' ',
+				icon_hl = '@variable',
+				desc = 'Files',
+				group = 'Label',
+				action = 'Telescope find_files',
+				key = 'f',
 			},
 			{
 				icon = ' ',
@@ -101,10 +74,10 @@ db.setup({
 				key = 't',
 			},
 			{
-				desc = ' PackerStatus',
+				desc = ' Check Health',
 				group = 'Number',
-				action = 'PackerStatus',
-				key = 's',
+				action = 'checkhealth',
+				key = 'c',
 			},
 		},
 	},
