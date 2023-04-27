@@ -79,10 +79,23 @@ end
 -- LINTER SETUP
 
 -- Use null-ls to help with making using linters way easier
-local null_ls = require("null-ls")
+local null_ls = require('null-ls')
+
+-- Make some fixups to staticcheck
+local staticcheck_builtin = null_ls.builtins.diagnostics.staticcheck
+-- staticcheck_builtin._opts.command = "/home/ccuddigan/go/bin/staticcheck"
+
+-- Make sure staticcheck does not tag everything as an error
+staticcheck_builtin._opts.args = {
+    "-f",
+    "json",
+    '-fail',
+    'none',
+    "./...",
+}
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.diagnostics.revive
+        staticcheck_builtin,
     },
 })
