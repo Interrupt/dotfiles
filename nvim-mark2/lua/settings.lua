@@ -156,14 +156,6 @@ vim.api.nvim_create_autocmd('TermOpen', {
     command = "setlocal nonumber norelativenumber",
 })
 
--- Make the terminal use a preset background color
-vim.api.nvim_set_hl(0, 'TerminalWindow', { link = 'NvimTreeNormal' })
-vim.api.nvim_create_augroup("_terminal", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen", {
-    command = "setlocal winhighlight=Normal:TerminalWindow",
-    group = "_terminal",
-})
-
 -- Close nvim-tree if it was the last thing open in a tab
 --[[
 local function tab_win_closed(winnr)
@@ -202,4 +194,4 @@ vim.api.nvim_create_autocmd("WinClosed", {
     nested = true
 })
 ]]
-   --
+--

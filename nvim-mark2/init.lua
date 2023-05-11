@@ -118,7 +118,6 @@ require('plugin_config.cmake-tools')
 require('plugin_config.lspconfig')
 require('plugin_config.nvim-cmp')
 require('plugin_config.dashboard')
--- require('plugin_config.glow')
 require('plugin_config.tidy')
 require('plugin_config.todo-comments')
 -- require('plugin_config.neorg') -- TODO: crashing?
@@ -128,36 +127,9 @@ require('plugin_config.which-key')
 require('plugin_config.markid')
 
 
-
--- require('plugin_config.themes.github_theme')
+-- Themes
 require('plugin_config.themes.catppuccin')
--- require('plugin_config.themes.rose-pine')
--- require('plugin_config.themes.kanagawa')
--- require('plugin_config.themes.monokai-pro')
--- require('plugin_config.themes.aylin') -- do not require this
--- require('plugin_config.themes.kanagawa')
--- require('plugin_config.themes.juliana')
--- require('plugin_config.themes.nightfox')
--- require('plugin_config.themes.onedark')
--- require('plugin_config.themes.tundra')
--- require('plugin_config.themes.onedark-pro')
--- require('plugin_config.themes.onehalf')
-
-
--- vim.cmd.colorscheme('rose-pine')
--- vim.cmd.colorscheme('github_dark_default')
--- vim.cmd.colorscheme('nord')
--- vim.cmd.colorscheme('carbonfox')
 vim.cmd.colorscheme('catppuccin')
--- vim.cmd.colorscheme('tokyonight')
--- vim.cmd.colorscheme('kanagawa')
--- vim.cmd.colorscheme('aylin')
--- vim.cmd.colorscheme('monokai-pro')
--- vim.cmd.colorscheme('onehalfdark')
--- vim.cmd.colorscheme('moonfly')
 
-
-
--- for token in string.gmatch(os.getenv('PATH'), '[^;]+') do
---     print(token)
--- end
+-- Not sure why this needs to be set here and not in plugin_config/themes/catppucin
+vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#181825', fg = '#313244' })
