@@ -90,20 +90,8 @@ require('lazy').setup({
     { 'rebelot/kanagawa.nvim',       name = 'kanagawa',   lazy = false },
     { 'catppuccin/nvim',             name = 'catppuccin', lazy = false },
     { 'folke/tokyonight.nvim',       lazy = false },
-    --{ 'loctvl842/monokai-pro.nvim',       lazy = false },
-    --{ 'AhmedAbdulrahman/vim-aylin',       lazy = false }, --         name = 'vim-aylin' ,lazy=false},
-    --{ 'mcchrish/zenbones.nvim',           dependencies = 'rktjmp/lush.nvim', lazy = false },
-    --{ 'uloco/bluloco.nvim',               dependencies = 'rktjmp/lush.nvim', lazy = false },
-    --{ 'tanvirtin/monokai.nvim',           lazy = false },
-    --{ 'kaiuri/nvim-juliana',              lazy = false },
-    --{ 'EdenEast/nightfox.nvim',           lazy = false },
-    --{ 'shaunsingh/nord.nvim',             lazy = false },
     { 'navarasu/onedark.nvim',       lazy = false },
-    --{ 'nyoom-engineering/oxocarbon.nvim', lazy = false },
     { 'tiagovla/tokyodark.nvim',     lazy = false },
-    --{ 'olimorris/onedarkpro.nvim',        lazy = false },
-    --{ 'sam4llis/nvim-tundra',             lazy = false },
-    --{ 'bluz71/vim-moonfly-colors',        lazy = false },
 
     --
     { 'folke/twilight.nvim',         lazy = false },
@@ -113,12 +101,6 @@ require('lazy').setup({
         dependencies = 'nvim-lua/plenary.nvim'
     },
     { 'folke/zen-mode.nvim',                 lazy = false },
-    -- {
-    --     'iamcco/markdown-preview.nvim',
-    --     ft = "markdown",
-    --     build = function() vim.fn["mkdp#util#install"]() end,
-    --     lazy = false
-    -- },
     {
         'ellisonleao/glow.nvim',
         lazy = false,
@@ -157,7 +139,7 @@ require('lazy').setup({
                         folds = true,
                         icon_preset = 'varied', -- basic, diamond, varied
                     },
-                }, -- Adds pretty icons to your documents
+                },                              -- Adds pretty icons to your documents
                 -- ["core.norg.dirman"] = {      -- Manages Neorg workspaces
                 --     config = {
                 --         workspaces = {
@@ -183,7 +165,8 @@ require('lazy').setup({
         -- configured in lspconfig.lua!
     },
     { 'jose-elias-alvarez/null-ls.nvim', lazy = false, },
-    { 'kosayoda/nvim-lightbulb', -- code actions lightbulb icon
+    {
+        'kosayoda/nvim-lightbulb', -- code actions lightbulb icon
         lazy = false,
         config = function()
             require('nvim-lightbulb').setup({
@@ -192,6 +175,14 @@ require('lazy').setup({
 
             -- better icon
             vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LspDiagnosticsDefaultInformation" })
+        end
+    },
+    {
+        'ahmedkhalf/project.nvim',
+        lazy = false,
+        config = function()
+            require("project_nvim").setup {}
+            require('telescope').load_extension('projects')
         end
     },
 })
