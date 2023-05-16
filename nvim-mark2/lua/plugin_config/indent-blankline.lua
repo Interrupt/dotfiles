@@ -3,6 +3,9 @@ require("indent_blankline").setup({
     char = "▏",
     context_char = "▏",
     filetype_exclude = {
+        'help',
+        'dashboard',
+        'NvimTree',
         -- ...
     },
     context_highlight_list = {

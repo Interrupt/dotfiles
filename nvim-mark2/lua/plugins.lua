@@ -185,4 +185,10 @@ require('lazy').setup({
             require('telescope').load_extension('projects')
         end
     },
+
+    -- Wiki!
+    {
+        'vimwiki/vimwiki',
+        lazy = false,
+    },
 })

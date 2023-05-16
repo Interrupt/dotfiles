@@ -138,15 +138,21 @@ local mappings = {
         name = "Shell",
         h = { "<cmd>:rightbelow18 :sp <bar> :term<CR>", "Open Shell Console" },
     },
+    W     = {
+        name = "Wiki",
+        i = { "<cmd>:VimwikiTabIndex<CR>", "Open Index" },
+        n = { "<Plug>VimwikiNextLink", "Next Link" },
+        p = { "<Plug>VimwikiPrevLink", "Previous Link" },
+    },
 }
 
 vim.keymap.set({ 'n' }, '<C-k>', function()
     require('lsp_signature').toggle_float_win()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
+end, { silent = true, noremap = true, desc = 'Toggle signature' })
 
 vim.keymap.set({ 'n' }, '<Leader>k', function()
     vim.lsp.buf.signature_help()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
+end, { silent = true, noremap = true, desc = 'Toggle signature' })
 
 local opts = { prefix = '<leader>' }
 

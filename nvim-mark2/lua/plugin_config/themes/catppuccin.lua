@@ -1,8 +1,8 @@
 require("catppuccin").setup({
     term_colors = true,
-    integrations = {
-        bufferline = true,
-    }
+    -- integrations = {
+    --     bufferline = true,
+    -- }
 })
 
 -- Make the terminal use a preset background color
