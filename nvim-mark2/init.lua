@@ -132,4 +132,5 @@ require('plugin_config.themes.catppuccin')
 vim.cmd.colorscheme('catppuccin')
 
 -- Not sure why this needs to be set here and not in plugin_config/themes/catppucin
-vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#181825', fg = '#313244' })
+-- vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#181825', fg = '#313244' })
+vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#1e1e2e', fg = '#313244' })

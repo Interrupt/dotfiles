@@ -16,6 +16,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- Give nvim-tree a better separator
 --vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#1e1e2e', fg = '#313244' })
 vim.opt.fillchars = {
-    vert = "▕",
-    --vert = "▏",
+    -- vert = "▕",
+    vert = "▏",
 }
