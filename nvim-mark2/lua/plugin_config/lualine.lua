@@ -42,7 +42,7 @@ local config = {
         theme = 'horizon',
         -- section_separators = '',
         component_separators = '|',
-        disabled_filetypes = { "alpha", "dashboard", "Outline" },
+        disabled_filetypes = { "alpha", "dashboard", "Outline", "NvimTree", "terminal", "" },
     },
     sections = {
         lualine_a = { 'mode' },
@@ -59,6 +59,33 @@ local config = {
         lualine_x = { 'location' },
         lualine_y = {},
         lualine_z = {}
+    },
+    winbar = {
+        lualine_a = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {
+            {
+                'filename',
+                color = { fg = '#89b4fa', bg = 'none' },
+                separator = { left = '', right = '' }
+            }
+        }
+    },
+    inactive_winbar = {
+        lualine_b = {},
+        lualine_a = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {
+            {
+                'filename',
+                color = { fg = '#45475a', bg = 'none' },
+                separator = { left = '', right = '' }
+            }
+        }
     },
     extensions = {
         "nvim-tree"

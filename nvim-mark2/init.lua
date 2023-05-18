@@ -141,5 +141,5 @@ vim.opt.fillchars = {
 vim.opt.laststatus = 3
 
 -- Put the filename as a winbar
-vim.opt.winbar = "%=%f  "
-vim.api.nvim_set_hl(0, "WinBar", { fg = '#89b4fa' })
+-- vim.opt.winbar = "%=%f  "
+-- vim.api.nvim_set_hl(0, "WinBar", { fg = '#89b4fa' })
