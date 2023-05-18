@@ -40,7 +40,7 @@ local config = {
     options = {
         icons_enabled = true,
         theme = 'horizon',
-        section_separators = '',
+        -- section_separators = '',
         component_separators = '|',
         disabled_filetypes = { "alpha", "dashboard", "Outline" },
     },

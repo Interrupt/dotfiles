@@ -5,7 +5,12 @@ local config = require("bufferline.config")
 
 require("bufferline").setup {
     options = {
-        offsets = { { filetype = "NvimTree", text = "File Explorer", highlight = "NvimTreeFolderName" } },
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "",
+                -- highlight = "NvimTreeFolderName",
+            } },
         separator_style = "slant",
     },
     highlights = require("catppuccin.groups.integrations.bufferline").get(), -- required to set proper bg colors

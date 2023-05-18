@@ -131,6 +131,15 @@ require('plugin_config.markid')
 require('plugin_config.themes.catppuccin')
 vim.cmd.colorscheme('catppuccin')
 
--- Not sure why this needs to be set here and not in plugin_config/themes/catppucin
--- vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#181825', fg = '#313244' })
-vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#1e1e2e', fg = '#313244' })
+-- Make window borders look cleaner
+vim.api.nvim_set_hl(0, 'NvimTreeWinSeparator', { bg = '#1e1e2e', fg = '#1e1e2e' })
+vim.opt.fillchars = {
+    vertright = ' ',
+}
+
+-- Enable global statusbar
+vim.opt.laststatus = 3
+
+-- Put the filename as a winbar
+vim.opt.winbar = "%=%f  "
+vim.api.nvim_set_hl(0, "WinBar", { fg = '#89b4fa' })
