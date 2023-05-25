@@ -11,5 +11,20 @@ require("scrollbar").setup({
         Info = { color = colors.green },
         Hint = { color = colors.teal },
         Misc = { color = colors.lavender },
-    }
+    },
+    excluded_filetypes = {
+        "prompt",
+        "TelescopePrompt",
+        "noice",
+        "NvimTree",
+        "dashboard",
+        "alpha",
+        "lazy",
+        "mason",
+        "DressingInput",
+        "",
+    },
+    handlers = {
+        gitsigns = true,
+    },
 })
