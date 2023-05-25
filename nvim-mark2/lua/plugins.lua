@@ -191,6 +191,34 @@ require('lazy').setup({
             'vimwiki/vimwiki',
             lazy = false,
         },
+
+        -- Scrollbar
+        {
+            "petertriho/nvim-scrollbar",
+            event = "BufReadPost",
+            opts = {
+                set_highlights = false,
+                excluded_filetypes = {
+                    "prompt",
+                    "TelescopePrompt",
+                    "noice",
+                    "NvimTree",
+                    "dashboard",
+                    "alpha",
+                    "lazy",
+                    "mason",
+                    "DressingInput",
+                    "",
+                },
+                handlers = {
+                    gitsigns = true,
+                },
+            },
+            config = function()
+                require('plugin_config.scrollbar')
+            end,
+        },
+
     },
     { ui = { border = 'rounded' } }
 )
