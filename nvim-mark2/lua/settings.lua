@@ -97,6 +97,8 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+-- Hide command bar when not in use
+vim.o.cmdheight = 0
 
 -- Toggle folds with 'zc' in normal mode
 function toggle_fold()

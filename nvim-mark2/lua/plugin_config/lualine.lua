@@ -41,15 +41,15 @@ local config = {
         icons_enabled = true,
         theme = 'horizon',
         -- section_separators = '',
-        component_separators = '|',
-        disabled_filetypes = { "alpha", "dashboard", "Outline", "NvimTree", "terminal", "" },
+        component_separators = ' ',
+        disabled_filetypes = { "alpha", "dashboard", "Outline", "terminal", "" },
     },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
+        lualine_c = {},
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
+        lualine_y = {},
         lualine_z = { 'location' }
     },
     inactive_sections = {
