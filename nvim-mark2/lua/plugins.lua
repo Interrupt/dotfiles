@@ -161,7 +161,12 @@ require('lazy').setup({
         },
         {
             'ray-x/lsp_signature.nvim', -- function signatures as you type!
-            lazy = false,
+            event = { "InsertEnter" },
+            opts = {
+                floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
+                hint_scheme = "Comment",               -- highlight group for the virtual text
+                max_width = 120,                       -- default was only 80
+            },
             -- configured in lspconfig.lua!
         },
         { 'jose-elias-alvarez/null-ls.nvim', lazy = false, },
