@@ -61,31 +61,33 @@ local config = {
         lualine_z = {}
     },
     winbar = {
-        lualine_a = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {
+        lualine_a = {
             {
                 'filename',
+                path = 1,
                 color = { fg = '#89b4fa', bg = 'none' },
                 separator = { left = '', right = '' }
             }
-        }
-    },
-    inactive_winbar = {
-        lualine_b = {},
-        lualine_a = {},
+        },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {
+        lualine_z = {}
+    },
+    inactive_winbar = {
+        lualine_a = {
             {
                 'filename',
+                path = 1,
                 color = { fg = '#45475a', bg = 'none' },
                 separator = { left = '', right = '' }
             }
-        }
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
     },
     extensions = {
         "nvim-tree"

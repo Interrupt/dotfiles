@@ -8,10 +8,11 @@ require("bufferline").setup {
         offsets = {
             {
                 filetype = "NvimTree",
-                text = "",
+                text = "Folders",
                 -- highlight = "NvimTreeFolderName",
             } },
         separator_style = "slant",
+        show_buffer_close_icons = false,
     },
     highlights = require("catppuccin.groups.integrations.bufferline").get(), -- required to set proper bg colors
 }
