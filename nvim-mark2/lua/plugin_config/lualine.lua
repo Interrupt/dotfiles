@@ -42,13 +42,16 @@ local config = {
         theme = 'horizon',
         -- section_separators = '',
         component_separators = ' ',
-        disabled_filetypes = { "alpha", "dashboard", "Outline", "terminal", "" },
+        disabled_filetypes = {
+            statusline = { "alpha", "dashboard", "Outline", "terminal", "" },
+            winbar = { "NvimTree", "" }
+        },
     },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = {},
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { 'encoding', 'filetype' },
         lualine_y = {},
         lualine_z = { 'location' }
     },
@@ -90,7 +93,7 @@ local config = {
         lualine_z = {}
     },
     extensions = {
-        "nvim-tree"
+        --"nvim-tree"
     },
 }
 
@@ -111,21 +114,21 @@ ins_right {
         local msg = 'No Active Lsp'
         local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
         local clients = vim.lsp.get_active_clients()
+        local affix = " "
         if next(clients) == nil then
-            return msg
+            return msg .. affix
         end
         for _, client in ipairs(clients) do
             local filetypes = client.config.filetypes
             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return client.name
+                return client.name .. affix
             end
         end
-        return msg
+        return msg .. affix
     end,
-    icon = ' LSP:',
+    icon = '',
     color = { fg = colors.green },
 }
-
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
