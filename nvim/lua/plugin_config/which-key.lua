@@ -22,13 +22,15 @@ local mappings = {
     f     = {
         -- Symbol : Telescope
         name = "Telescope Finder",
-        f = { ":Telescope find_files<cr>", "Find Files" },                               -- DONE
-        g = { ":Telescope live_grep<cr>", "Live Grep" },                                 -- DONE
-        b = { ":Telescope buffers<cr>", "Buffers" },                                     -- DONE
-        r = { ":Telescope resume<cr>", "Resume" },                                       -- DONE
-        t = { ":TodoTelescope<cr>", "TODO List" },                                       -- DONE
-        p = { ":Telescope projects<cr>", "Projects" },                                   -- DONE
-        P = { ":Telescope colorscheme preview=true<cr>", "Color Scheme Preview" },       -- DONE
+        f = { ":Telescope find_files<cr>", "Find Files" },                         -- DONE
+        g = { ":Telescope live_grep<cr>", "Live Grep" },                           -- DONE
+        b = { ":Telescope buffers<cr>", "Buffers" },                               -- DONE
+        r = { ":Telescope resume<cr>", "Resume" },                                 -- DONE
+        t = { ":TodoTelescope<cr>", "TODO List" },                                 -- DONE
+        p = { ":Telescope projects<cr>", "Projects" },                             -- DONE
+        P = { ":Telescope colorscheme preview=true<cr>", "Color Scheme Preview" }, -- DONE
+        u = { ":Telescope undo<cr>", "Undo Tree" },
+        c = { ":Telescope neoclip<cr>", "View Clipboard" },
         e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },           -- DONE
         S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" }, -- DONE

@@ -54,6 +54,7 @@ require('lazy').setup({
                 'nvim-telescope/telescope-ui-select.nvim',
                 'kdheepak/lazygit.nvim',
                 'voldikss/vim-floaterm',
+                'debugloop/telescope-undo.nvim',
             }
         },
         {
@@ -221,6 +222,19 @@ require('lazy').setup({
             },
             config = function()
                 require('plugin_config.scrollbar')
+            end,
+        },
+
+        -- Clipboard
+        {
+            "AckslD/nvim-neoclip.lua",
+            requires = {
+                -- you'll need at least one of these
+                { 'nvim-telescope/telescope.nvim' },
+                -- {'ibhagwan/fzf-lua'},
+            },
+            config = function()
+                require('neoclip').setup()
             end,
         },
 
