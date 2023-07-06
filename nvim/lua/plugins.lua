@@ -196,6 +196,18 @@ require('lazy').setup({
         {
             'vimwiki/vimwiki',
             lazy = false,
+            init = function()
+                -- Config info: Make ~/notes a symlink to wherever notes actually live
+                vim.g.vimwiki_list = {
+                    {
+                        path = '~/notes/wiki',
+                        syntax = 'markdown',
+                        ext = '.md',
+                        auto_tags = 1,
+                        auto_toc = 1,
+                    },
+                }
+            end
         },
 
         -- Scrollbar
