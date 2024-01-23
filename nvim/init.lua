@@ -17,6 +17,9 @@ vim.api.nvim_set_var('lsp_servers',
             },
         },
         {
+            name = 'zls',
+        },
+        {
             name = 'gopls',
             cmd = { "gopls", "serve" },
             filetypes = { "go", "gomod" },
@@ -84,6 +87,7 @@ vim.api.nvim_set_var('treesitter_servers',
         'norg',
         'vim', -- This solves syntax highlighting in {.lua} files
         'go',
+        'zig',
     }
 )
 
