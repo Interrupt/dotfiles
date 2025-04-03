@@ -1,9 +1,31 @@
 return {
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      transparent_background = false,
+      flavour = "macchiato",
+      styles = {
+        comments = { "italic" },
+      },
+      custom_highlights = {
+        NeoTreeWinSeparator = { -- To re-enable neotree's border
+          -- fg = "#11111B",
+          -- bg = "#1E1E2E",
+          fg = "#181926",
+          bg = "#24273A",
+        },
+      },
+    },
+    priority = 1000,
+    lazy = false,
+  },
   -- Configure LazyVim to load the catppuccin theme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "catppuccin-macchiato",
+      -- colorscheme = "tokyonight-moon",
     },
   },
   -- Turn off inlay hints by default

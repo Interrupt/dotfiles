@@ -10,8 +10,13 @@ return {
       },
     },
     zen = {
-      win = {
-        backdrop = { transparent = false, blend = 30 }, -- make bg opaque
+      win = { backdrop = { transparent = false, blend = 90 } }, -- make bg opaque
+    },
+    picker = {
+      layout = {
+        layout = {
+          backdrop = false, -- turn off background dimming
+        },
       },
     },
   },

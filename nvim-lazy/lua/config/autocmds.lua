@@ -8,7 +8,8 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Make the terminal use a preset background color to match catppuccin
-vim.api.nvim_set_hl(0, "TerminalWindow", { bg = "#11111b" }) -- Use the catpuccin mocha theme 'Crust' color
+vim.api.nvim_set_hl(0, "TerminalWindow", { bg = "#181926" }) -- Use the catpuccin macchiato theme 'Crust' color
 
 -- Make neo-tree's title use a dark background
 vim.api.nvim_set_hl(0, "NeoTreeTitle", { fg = "#89B4FA", bg = "#181825" })
+vim.api.nvim_set_hl(1, "NeoTreeWinSeparator", { fg = "#89B4FA", bg = "#181825" })
