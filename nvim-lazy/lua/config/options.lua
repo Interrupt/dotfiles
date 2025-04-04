@@ -12,7 +12,8 @@ vim.o.relativenumber = false -- Relative line numbers
 -- switch vimwiki to markdown files
 vim.g.vimwiki_list = {
   {
-    path = "~/vimwiki",
+    -- path = "~/vimwiki",
+    path = "~/Dropbox (Maestral)/Notes/vimwiki", -- sync in dropbox
     syntax = "markdown",
     ext = ".md",
   },

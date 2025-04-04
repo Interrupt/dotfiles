@@ -13,3 +13,15 @@ vim.api.nvim_set_hl(0, "TerminalWindow", { bg = "#181926" }) -- Use the catpucci
 -- Make neo-tree's title use a dark background
 vim.api.nvim_set_hl(0, "NeoTreeTitle", { fg = "#89B4FA", bg = "#181825" })
 vim.api.nvim_set_hl(1, "NeoTreeWinSeparator", { fg = "#89B4FA", bg = "#181825" })
+
+-- Only enable folding when supported
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  callback = function()
+    if require("nvim-treesitter.parsers").has_parser() then
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    else
+      vim.opt.foldmethod = "syntax"
+    end
+  end,
+})
