@@ -19,6 +19,15 @@ keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase w
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
+-- dap debugger mappings
+keymap.set({ "n", "v" }, "<F3>", "<cmd>lua require('dapui').toggle()<CR>", { silent = true, desc = "DAP toggle UI" })
+keymap.set({ "n", "v" }, "<F4>", "<cmd>lua require('dap').pause()<CR>", { silent = true, desc = "DAP pause (thread)" })
+keymap.set({ "n", "v" }, "<F5>", "<cmd>lua require('dap').continue()<CR>", { silent = true, desc = "DAP launch" })
+keymap.set({ "n", "v" }, "<F6>", "<cmd>lua require('dap').step_into()<CR>", { silent = true, desc = "DAP step into" })
+keymap.set({ "n", "v" }, "<F7>", "<cmd>lua require('dap').step_over()<CR>", { silent = true, desc = "DAP step over" })
+keymap.set({ "n", "v" }, "<F8>", "<cmd>lua require('dap').step_out()<CR>", { silent = true, desc = "DAP step out" })
+keymap.set({ "n", "v" }, "<F9>", "<cmd>lua require('dap').step_back()<CR>", { silent = true, desc = "DAP step back" })
+
 -- Move between tabs
 -- keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
 -- keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
@@ -30,6 +39,7 @@ local mappings = {
   { "<leader>Wi", "<cmd>:VimwikiIndex<CR>", desc = "Open Index" },
   { "<leader>Wn", "<cmd>:VimwikiNextLink<CR>", desc = "Next Link" },
   { "<leader>Wp", "<cmd>:VimwikiPrevLink<CR>", desc = "Prevous Link" },
+  { "<leader>Wd", "<cmd>:lua Snacks.dashboard()<CR>", desc = "Dashboard" },
 }
 
 wk.add(mappings)
