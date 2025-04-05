@@ -21,3 +21,6 @@ vim.g.vimwiki_list = {
 
 -- but not all markdown files are vimwiki
 vim.g.vimwiki_global_ext = 0
+
+-- let vimwiki files render as markdown
+vim.treesitter.language.register("markdown", "vimwiki")
