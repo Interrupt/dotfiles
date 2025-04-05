@@ -28,18 +28,17 @@ keymap.set({ "n", "v" }, "<F7>", "<cmd>lua require('dap').step_over()<CR>", { si
 keymap.set({ "n", "v" }, "<F8>", "<cmd>lua require('dap').step_out()<CR>", { silent = true, desc = "DAP step out" })
 keymap.set({ "n", "v" }, "<F9>", "<cmd>lua require('dap').step_back()<CR>", { silent = true, desc = "DAP step back" })
 
--- Move between tabs
--- keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
--- keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+-- dashboard
+keymap.set({ "n" }, "<leader>;", "<cmd>lua Snacks.dashboard()<CR>", { desc = "Dashboard" })
 
 -- Set some new which-key groups
 local wk = require("which-key")
 local mappings = {
+  -- Vimwiki
   { "<leader>W", group = "Vimwiki" },
   { "<leader>Wi", "<cmd>:VimwikiIndex<CR>", desc = "Open Index" },
   { "<leader>Wn", "<cmd>:VimwikiNextLink<CR>", desc = "Next Link" },
   { "<leader>Wp", "<cmd>:VimwikiPrevLink<CR>", desc = "Prevous Link" },
-  { "<leader>Wd", "<cmd>:lua Snacks.dashboard()<CR>", desc = "Dashboard" },
 }
 
 wk.add(mappings)

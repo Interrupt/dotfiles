@@ -119,6 +119,7 @@ return {
   -- add more treesitter parsers
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "OXY2DEV/markview.nvim" },
     opts = {
       ensure_installed = {
         "bash",

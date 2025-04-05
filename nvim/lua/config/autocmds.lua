@@ -25,3 +25,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end
   end,
 })
+
+-- Fix vimwiki preview issue?
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "FileType" }, {
+  pattern = "markdown",
+  callback = function()
+    vim.api.nvim_command("Markview Toggle")
+    vim.api.nvim_command("Markview Toggle")
+  end,
+})
