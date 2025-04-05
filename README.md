@@ -1,18 +1,27 @@
 # Setting up NeoVim
-sudo apt install python3-pip
-sudo apt install python3-venv
-python3 -m pip install --user --upgrade pynvim
+
+`brew install neovim`
 
 ## After installing NeoVim
-:GoInstallBinaries
-:COQdep
-:TSUpdate go
-:TSUpdate vim
 
-# Helpful things to install!
+Copy the `nvim` dir to `~/.config/nvim/`
 
-## Start ssh-agent automatically
-sudo apt-get install keychain
+## Helpful things to install
+
+For debugging Zig and Go inside nvim:
+
+`brew install llvm`
+`brew install delve`
+
+For better find / search support:
+
+`brew install fd` - better find in terminal
+`brew install fzf` - fast fuzzy finder in terminal
+
+### Start ssh-agent automatically
+
+`sudo apt-get install keychain`
 
 ### Add to bashrc
-eval $(keychain --eval id_rsa)
+
+`eval $(keychain --eval id_rsa)`
