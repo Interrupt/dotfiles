@@ -1,6 +1,0 @@
-{
-    "diagnostics.globals": [
-        "toggle_fold",
-        "is_markdown"
-    ]
-}
