@@ -22,6 +22,14 @@ return {
       },
     },
   },
+  -- for task running
+  {
+    "stevearc/overseer.nvim",
+    keys = {
+      { "<leader>m", "<cmd>Make<CR>", desc = "Build project" },
+      { "<leader>r", "<cmd>Make run<CR>", desc = "Run project" },
+    },
+  },
   {
     "leoluz/nvim-dap-go",
     optional = true,

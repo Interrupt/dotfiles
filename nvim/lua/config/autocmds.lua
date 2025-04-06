@@ -26,11 +26,31 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- Fix vimwiki preview issue?
+-- Fix vimwiki preview issue - strange!
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "FileType" }, {
   pattern = "markdown",
   callback = function()
     vim.api.nvim_command("Markview Toggle")
     vim.api.nvim_command("Markview Toggle")
   end,
+})
+
+-- Run make as an Overseer task
+vim.api.nvim_create_user_command("Make", function(params)
+  local cmd, num_subs = vim.o.makeprg:gsub("%S%*", params.args)
+  if num_subs == 0 then
+    cmd = cmd .. " " .. params.args
+  end
+  local task = require("overseer").new_task({
+    cmd = vim.fn.expandcmd(cmd),
+    components = {
+      { "on_output_quickfix", open = not params.bang, open_height = 8, close = true },
+      "default",
+    },
+  })
+  task:start()
+end, {
+  desc = "Run your makeprg as an Overseer task",
+  nargs = "*",
+  bang = true,
 })
