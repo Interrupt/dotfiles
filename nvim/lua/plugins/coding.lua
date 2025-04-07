@@ -26,8 +26,8 @@ return {
   {
     "stevearc/overseer.nvim",
     keys = {
-      { "<leader>m", "<cmd>Make<CR>", desc = "Build project" },
-      { "<leader>r", "<cmd>Make run<CR>", desc = "Run project" },
+      { "<leader>cb", "<cmd>Make<CR>", desc = "Build project" },
+      { "<leader>ce", "<cmd>Make run<CR>", desc = "Run (execute) project" },
     },
   },
   {
