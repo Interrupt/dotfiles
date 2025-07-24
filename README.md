@@ -10,14 +10,16 @@ Copy the `nvim` dir to `~/.config/nvim/`
 
 For debugging Zig and Go inside nvim:
 
-`brew install llvm`
-`brew install delve`
+```
+brew install llvm
+brew install delve
+```
 
 For better find / search support:
 
-`brew install fd` - better find in terminal
-`brew install fzf` - fast fuzzy finder in terminal
-`brew install rg` - live grep with ripgrep
+- `brew install fd` - better find in terminal
+- `brew install fzf` - fast fuzzy finder in terminal
+- `brew install rg` - live grep with ripgrep
 
 ### Start ssh-agent automatically
 
