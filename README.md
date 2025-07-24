@@ -17,6 +17,7 @@ For better find / search support:
 
 `brew install fd` - better find in terminal
 `brew install fzf` - fast fuzzy finder in terminal
+`brew install rg` - live grep with ripgrep
 
 ### Start ssh-agent automatically
 
